@@ -3,7 +3,7 @@ import Hello from "./Hello";
 import useFetch from "./useFetch";
 import Bye from "./Bye";
 
-const reducer = (state, action) => {
+export const reducer = (state, action) => {
   switch (action.type) {
     case "add-todo":
       return {
