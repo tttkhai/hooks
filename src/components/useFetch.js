@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 
-function getFullName({ first, last }) {
+export const getFullName=({ first, last }) => {
   return `${first} ${last}`;
 }
 function useFetch(url) {
