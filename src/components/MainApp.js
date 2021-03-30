@@ -19,7 +19,6 @@ export const reducer = (state, action) => {
 };
 
 function MainApp() {
-  // const [input, setInput]=useState('')
   const [pageNumber, setPageNumber] = useState(0);
   const [count, setCount] = useState(0);
   const url = `https://randomuser.me/api?page=${pageNumber}`;

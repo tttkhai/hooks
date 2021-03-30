@@ -4,9 +4,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import About from "./components/About";
 import Home from "./components/Home";
 import { UseContext } from "./components/UseContext";
-import React, { useEffect, useState } from "react";
-import { login } from "./services/login";
-import { getFullName } from "./components/useFetch";
+import React, { useState } from "react";
 
 function App() {
   const [user, setUser] = useState({ id: null, first: null, last: null });
@@ -25,9 +23,11 @@ function App() {
               <Link to="/app">Main App</Link>
             </li>
         </nav>
+        <UseContext.Provider value={{user, setUser}}>
         <Route path="/" exact component={Home} />
         <Route path="/about" component={About} />
         <Route path="/app" component={MainApp} />
+        </UseContext.Provider>
       </Router>
     </div>
   );
