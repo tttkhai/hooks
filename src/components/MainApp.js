@@ -2,6 +2,8 @@ import React, { useState, useCallback, useReducer } from "react";
 import Hello from "./Hello";
 import useFetch from "./useFetch";
 import Bye from "./Bye";
+import ListItem from './ListItem';
+
 
 export const reducer = (state, action) => {
   switch (action.type) {
@@ -11,20 +13,22 @@ export const reducer = (state, action) => {
       };
     case "toggle-todo":
       return {
-          todo: state.todo.map((res, idx)=> action.payload===idx?{...res, complete: !res.complete}:res)
+        todo: state.todo.map((res, idx) =>
+          action.payload === idx ? { ...res, complete: !res.complete } : res
+        ),
       };
     default:
       return state.todo;
   }
 };
 
-function MainApp() {
+export default function MainApp({ expenses }) {
   const [pageNumber, setPageNumber] = useState(0);
   const [count, setCount] = useState(0);
   const url = `https://randomuser.me/api?page=${pageNumber}`;
   const { data, loading } = useFetch(url);
   const [showHello, setShowHello] = useState(true);
-  const [{todo}, dispatch] = useReducer(reducer, { todo: [] });
+  const [{ todo }, dispatch] = useReducer(reducer, { todo: [] });
   const [text, setText] = useState("");
   const increment = useCallback(
     (n) => {
@@ -45,23 +49,39 @@ function MainApp() {
       <div>{count}</div>
       <form
         onSubmit={(e) => {
-          e.preventDefault()
+          e.preventDefault();
           dispatch({ type: "add-todo", payload: text });
-          setText('')
+          setText("");
         }}
       >
-        <input value={text} name="text" onChange={(e) => setText(e.target.value)} />
+        <input
+          value={text}
+          name="text"
+          onChange={(e) => setText(e.target.value)}
+        />
       </form>
       {todo.map((res, index) => {
         return (
-          <div style={{textDecoration: res.complete? 'line-through': ''}} key={index} onClick={() => dispatch({ type: "toggle-todo", payload: index })}>
+          <div
+            style={{ textDecoration: res.complete ? "line-through" : "" }}
+            key={index}
+            onClick={() => dispatch({ type: "toggle-todo", payload: index })}
+          >
             {res.data}
           </div>
         );
       })}
+      <div className="expenses">
+        {expenses.length===0?  
+          (<p>Nothing</p>):
+          (expenses.map((res) => {
+            return <ListItem key={res.id} className="hello" {...res} /> 
+          }))
+        }
+      </div>
       {/* <input type="email" onChange={(e)=> setInput(e.target.value)}/> */}
     </div>
   );
 }
 
-export default MainApp;
+// export default MainApp;
