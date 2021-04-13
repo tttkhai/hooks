@@ -2,8 +2,8 @@ import React, { useState, useCallback, useReducer } from "react";
 import Hello from "./Hello";
 import useFetch from "./useFetch";
 import Bye from "./Bye";
-import ListItem from './ListItem';
-
+import Expenses from "./Expenses";
+import Form from './Form'
 
 export const reducer = (state, action) => {
   switch (action.type) {
@@ -22,7 +22,7 @@ export const reducer = (state, action) => {
   }
 };
 
-export default function MainApp({ expenses }) {
+export default function MainApp() {
   const [pageNumber, setPageNumber] = useState(0);
   const [count, setCount] = useState(0);
   const url = `https://randomuser.me/api?page=${pageNumber}`;
@@ -30,6 +30,15 @@ export default function MainApp({ expenses }) {
   const [showHello, setShowHello] = useState(true);
   const [{ todo }, dispatch] = useReducer(reducer, { todo: [] });
   const [text, setText] = useState("");
+
+  const handleChange=(value)=>{
+    setText(value)
+  }
+  const handleSubmit =()=>{
+    setText("")
+
+    dispatch({ type: 'add-todo', payload: text });
+  }
   const increment = useCallback(
     (n) => {
       setCount((c) => c + n);
@@ -47,19 +56,8 @@ export default function MainApp({ expenses }) {
       {showHello && <Hello />}
       <Bye increment={increment} />
       <div>{count}</div>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          dispatch({ type: "add-todo", payload: text });
-          setText("");
-        }}
-      >
-        <input
-          value={text}
-          name="text"
-          onChange={(e) => setText(e.target.value)}
-        />
-      </form>
+      <Form text={text} handleChange={handleChange} handleSubmit={handleSubmit}/>
+
       {todo.map((res, index) => {
         return (
           <div
@@ -71,14 +69,7 @@ export default function MainApp({ expenses }) {
           </div>
         );
       })}
-      <div className="expenses">
-        {expenses.length===0?  
-          (<p>Nothing</p>):
-          (expenses.map((res) => {
-            return <ListItem key={res.id} className="hello" {...res} /> 
-          }))
-        }
-      </div>
+      <Expenses expenses={[]}/>
       {/* <input type="email" onChange={(e)=> setInput(e.target.value)}/> */}
     </div>
   );

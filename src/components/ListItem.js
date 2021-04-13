@@ -1,12 +1,8 @@
 import React from 'react'
 
-const ListItem = ({id, description}) => {
+export default function ListItem({id, description}) {
     return (
-        <div >
-               id: {id} . Description: {description}
-        </div>
+        <div> id: {id}. Description: {description} </div>
     )
 }
-
-export default ListItem;
 
