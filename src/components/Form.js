@@ -5,16 +5,14 @@ function Form({ text, handleChange, handleSubmit }) {
     handleChange(value);
   };
 
-  const submit=(e)=>{
+  const submit = (e) => {
     e.preventDefault();
-    handleSubmit();
-  }
+    // handleSubmit();
+  };
 
   return (
     <div>
-      <form
-        onSubmit={(e) => submit(e)}
-      >
+      <form onSubmit={(e) => submit(e)}>
         <input
           value={text}
           name="text"

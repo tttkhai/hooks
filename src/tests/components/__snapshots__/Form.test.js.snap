@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test form change input 1`] = `
+<div>
+  <form
+    onSubmit={[Function]}
+  >
+    <input
+      name="text"
+      onChange={[Function]}
+    />
+  </form>
+</div>
+`;
+
+exports[`test form submission 1`] = `
+<div>
+  <form
+    onSubmit={[Function]}
+  >
+    <input
+      name="text"
+      onChange={[Function]}
+    />
+  </form>
+</div>
+`;
+
+exports[`test form submission 2`] = `
+<div>
+  <form
+    onSubmit={[Function]}
+  >
+    <input
+      name="text"
+      onChange={[Function]}
+    />
+  </form>
+</div>
+`;

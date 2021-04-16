@@ -11,6 +11,6 @@ test("Hello should be rendered correctly", () => {
 
 test("should return 1 for length", () => {
   const wrapper = shallow(<Hello />);
-  // expect(wrapper.find('div').text()).toBe('showing Hello');
+  expect(wrapper.find('div').text()).toBe('showing Hello');
 });
 

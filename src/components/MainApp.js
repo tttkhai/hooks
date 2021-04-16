@@ -36,7 +36,6 @@ export default function MainApp() {
   }
   const handleSubmit =()=>{
     setText("")
-
     dispatch({ type: 'add-todo', payload: text });
   }
   const increment = useCallback(
